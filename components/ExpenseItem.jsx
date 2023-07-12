@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Pressable, Platform } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { getFormattedDate } from '../util/date'
-const ExpenseItem = ({ title, amount, date, id }) => {
+const ExpenseItem = ({ description, amount, date, id }) => {
   const navigatation = useNavigation()
   const humanReadableDate = getFormattedDate(date)
 
@@ -19,7 +19,7 @@ const ExpenseItem = ({ title, amount, date, id }) => {
         android_ripple={{ color: '#0e2844' }}
       >
         <View style={styles.infoContainer}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.description}>{description}</Text>
           <Text style={styles.date}>{humanReadableDate}</Text>
         </View>
         <View style={styles.amountContainer}>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   infoContainer: {
     padding: 12,
   },
-  title: {
+  description: {
     fontWeight: '700',
     fontSize: 15,
     color: '#ccc',

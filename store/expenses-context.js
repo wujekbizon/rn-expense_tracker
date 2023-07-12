@@ -3,9 +3,9 @@ import { DATA } from '../data'
 
 export const ExpensesContext = createContext({
   expenses: [],
-  addExpense: ({ title, amount, date }) => {},
+  addExpense: ({ description, amount, date }) => {},
   deleteExpense: (id) => {},
-  updateExpense: (id, { title, amount, date }) => {},
+  updateExpense: (id, { description, amount, date }) => {},
 })
 
 const expensesReducer = (state, action) => {

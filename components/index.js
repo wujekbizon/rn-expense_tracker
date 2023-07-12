@@ -5,5 +5,6 @@ import Summary from './Summary'
 import ExpenseItem from './ExpenseItem'
 import ExpensesOutput from './ExpensesOutput'
 import Button from './Button'
+import ExpenseForm from './ExpenseForm'
 
-export { LayoutWrapper, IconButton, ExpensesList, ExpenseItem, Summary, ExpensesOutput, Button }
+export { LayoutWrapper, IconButton, ExpensesList, ExpenseItem, Summary, ExpensesOutput, Button, ExpenseForm }
