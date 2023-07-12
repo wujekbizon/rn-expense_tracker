@@ -1,9 +1,9 @@
 import { createContext, useReducer } from 'react'
-import { DATA } from '../data'
 
 export const ExpensesContext = createContext({
   expenses: [],
   addExpense: ({ description, amount, date }) => {},
+  setExpenses: (expenses) => {},
   deleteExpense: (id) => {},
   updateExpense: (id, { description, amount, date }) => {},
 })
@@ -11,8 +11,10 @@ export const ExpensesContext = createContext({
 const expensesReducer = (state, action) => {
   switch (action.type) {
     case 'ADD':
-      const id = `${new Date().toString()}_${Math.random().toString()}`
-      return [{ ...action.payload, id }, ...state]
+      return [action.payload, ...state]
+    case 'SET':
+      const inverted = action.payload.reverse()
+      return inverted
     case 'UPDATE':
       const itemIndex = state.findIndex((expense) => expense.id === action.payload.id)
       const updatableExpense = state[itemIndex]
@@ -28,10 +30,14 @@ const expensesReducer = (state, action) => {
 }
 
 const ExpensesContextProvider = ({ children }) => {
-  const [expensesState, dispatch] = useReducer(expensesReducer, DATA)
+  const [expensesState, dispatch] = useReducer(expensesReducer, [])
 
   const addExpense = (expenseData) => {
     dispatch({ type: 'ADD', payload: expenseData })
+  }
+
+  const setExpenses = (expensesData) => {
+    dispatch({ type: 'SET', payload: expensesData })
   }
 
   const deleteExpense = (id) => {
@@ -53,6 +59,7 @@ const ExpensesContextProvider = ({ children }) => {
     addExpense,
     updateExpense,
     deleteExpense,
+    setExpenses,
   }
 
   return <ExpensesContext.Provider value={value}>{children}</ExpensesContext.Provider>
